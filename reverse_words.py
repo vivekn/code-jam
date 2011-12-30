@@ -61,6 +61,6 @@ if __name__ == '__main__':
 Done!
 Using python is cheating here. Need to try this again with a language with a bad string library like C.
 
-Complexity: O(n*|s|)
+Complexity: O(n)
 Time - 0.037s(large), 0.002s (small)
 """
