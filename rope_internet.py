@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 """
 Problem
 
@@ -60,6 +61,7 @@ Case #2: 0
 
 
 """
+from utils import inversion_count
 
 def intersects(pt1, pt2):
     """
@@ -74,6 +76,10 @@ def intersects(pt1, pt2):
 def count(points):
     return [intersects(point, other) for point in points for other in points if point != other].count(True) / 2
 
+def fast_count(points):
+    second = [y for x, y in sorted(points, key = lambda (x, y): x)]
+    return inversion_count(second)[1]
+
 def main():
     f = open('rope-large.in')
     out = open('rope.out', 'w')
@@ -84,7 +90,7 @@ def main():
         try:
             n = int(f.next())
             points = [tuple(map(int, f.next().split())) for i in range(n)]
-            lines.append("Case #%d: %d" % (index, count(points)))
+            lines.append("Case #%d: %d" % (index, fast_count(points)))
             index += 1
         except StopIteration:
             break
@@ -100,4 +106,8 @@ This is slow, but the limits of the problem are small as well. If
 n is large, an interval tree would be a good idea.
 
 Time - 20.601s(large), 0.002s(small)
+
+Faster algo using inversion count:
+    Complexity: O(n log n) (worst case)
+    Time: 0.002s (large)
 """
